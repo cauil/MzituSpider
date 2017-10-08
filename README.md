@@ -18,17 +18,17 @@ from spider import Spider
 s = Spider()
 ```
 
-download a single img. just:
+1. download a single img. just:
 ```
 s.down_img('http://i.meizitu.net/2017/09/23b01.jpg')
 ```
 
-download a img set. ie: `http://www.mzitu.com/103636`. just:
+2. download a img set. ie: `http://www.mzitu.com/103636`. just:
 ```
 s.down_img_set(103636)
 ```
 
-downlaod a category. just:
+3. downlaod a category. just:
 ```
 s.down_albums('http://www.mzitu.com/xinggan/')
 ```
