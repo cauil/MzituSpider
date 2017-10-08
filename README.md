@@ -6,6 +6,8 @@ A Spider use to download photos for mzitu.com, support img set and category thre
 python3 environment, not test in python2.
 
 ```
+git clone https://github.com/cauil/MzituSpider.git
+cd MzituSpider
 pip install -r requirements.txt
 ```
 
