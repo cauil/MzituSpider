@@ -81,7 +81,7 @@ class Spider(object):
 
     def make_dir(self, title, pic_set):
         pic_set = str(pic_set)
-        dir_name = './source/' + pic_set + '-' + title + '/'
+        dir_name = './downloads/' + pic_set + '-' + title + '/'
         if(not os.path.exists(dir_name)):
             os.makedirs(dir_name)
         return dir_name
@@ -92,7 +92,7 @@ class Spider(object):
         src = sp.select('.main-image img')[0]['src']
         return src
 
-    def down_img(self, src, number='1', base_dir='./source/'):
+    def down_img(self, src, number='1', base_dir='./downloads/'):
         if(not os.path.exists(base_dir)):
             os.makedirs(base_dir)
         number = str(number)

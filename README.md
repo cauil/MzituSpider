@@ -11,6 +11,8 @@ pip install -r requirements.txt
 
 ## Usage
 
+The file is download to dir './source/' default.
+
 ```
 from spider import Spider
 s = Spider()
