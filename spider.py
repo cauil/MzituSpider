@@ -44,33 +44,34 @@ class Spider(object):
         print('')
 
 
-    def down_img_set(self, pic_set):
-        pic_set = str(pic_set)
-        res = requests.get(self.base_url+pic_set)
-        html = res.text
-        soup = BeautifulSoup(html, "html.parser")
-        main_image = soup.select('.main-image')
+    def down_img_set(self, *kwg):
+        for pic_set in kwg:
+            pic_set = str(pic_set)
+            res = requests.get(self.base_url+pic_set)
+            html = res.text
+            soup = BeautifulSoup(html, "html.parser")
+            main_image = soup.select('.main-image')
 
-        if not len(main_image):
-            print('***warning***: picture set ' + pic_set + ' not exist')
-            return
+            if not len(main_image):
+                print('***warning***: picture set ' + pic_set + ' not exist')
+                return
 
-        (title, number) = self.get_title_number(soup)
-        base_dir = self.make_dir(title, pic_set)
+            (title, number) = self.get_title_number(soup)
+            base_dir = self.make_dir(title, pic_set)
 
-        print('')
-        print('>>>>>start download set ' + pic_set + '<<<<<<<<')
-        print('')
+            print('')
+            print('>>>>>start download set ' + pic_set + '<<<<<<<<')
+            print('')
 
-        for i in range(1, int(number)+1):
-            page_url = self.base_url + pic_set + '/' + str(i)
-            src = self.get_imgurl(page_url)
-            self.down_img(src, str(i), base_dir)
-            time.sleep(5)
+            for i in range(1, int(number)+1):
+                page_url = self.base_url + pic_set + '/' + str(i)
+                src = self.get_imgurl(page_url)
+                self.down_img(src, str(i), base_dir)
+                time.sleep(5)
 
-        print('')
-        print('>>>>>download set' + pic_set + ' complete<<<<<<<')
-        print('')
+            print('')
+            print('>>>>>download set' + pic_set + ' complete<<<<<<<')
+            print('')
 
     def get_title_number(self, soup):
         html_a = soup.select('div .pagenavi a')
@@ -103,7 +104,7 @@ class Spider(object):
                 }
 
         res = requests.get(src, headers=headers, stream=True)
-        file_name = ''.join([base_dir, number, '.jpg'])
+        file_name = ''.join([base_dir, '0'+number if len(number) < 2 else number, '.jpg'])
         print('=====>start download ' + file_name)
         with open(file_name, 'wb') as fd:
             for chunk in res.iter_content(128):
